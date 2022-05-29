@@ -28,18 +28,17 @@ jobs:
       id: build_image
       with:
         base_image: raspios_lite:latest
-        image_additional_mb: 40000
+        image_additional_mb: 4000
         copy_repository_path: /opt
         copy_artifact_path: Open.HD
         import_github_env: true
         commands: |
-            ls -a
-            cd /opt
             cd OpenHD_fmt
             mkdir build 
             cd build
             cmake ..
-            sudo make -j4 install
+            mkdir /tmp/fmt-package
+            sudo make DESTDIR=/tmp/fmt-package -j4 install
             cd ../../
 
     - name: Upload to Github
