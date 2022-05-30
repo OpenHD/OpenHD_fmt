@@ -38,6 +38,16 @@ jobs:
             touch fmt.deb
             ls -a
 
+
+    - name: Upload to Github
+      uses: 'actions/upload-artifact@v2'
+      with:
+        name: "FMT"
+        path: |
+          *.deb
+          *.log
+
+
     - name: Push
       id: push
       uses: cloudsmith-io/action@master
@@ -53,15 +63,6 @@ jobs:
         file: "*.deb"
 
 
-    - name: Upload to Github
-      uses: 'actions/upload-artifact@v2'
-      with:
-        name: "FMT"
-        path: |
-          *.deb
-          *.log
-        if-no-files-found: error
-          
       #- name: Install
       #  run: |
       #    cd OpenHD/build
