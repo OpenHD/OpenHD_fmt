@@ -34,6 +34,7 @@ jobs:
         import_github_env: true
         commands: |
             cd OpenHD_fmt
+            ls -a
             sudo ./install_dep.sh
             mkdir build 
             cd build
