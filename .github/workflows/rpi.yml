@@ -35,7 +35,14 @@ jobs:
         commands: |
             cd OpenHD_fmt
             ls -a
-            touch fmt.deb
+            sudo chmod +x install_dep.sh
+            sudo ./install_dep.sh
+            mkdir build 
+            cd build
+            cmake ..
+            mkdir fmt-package
+            sudo make DESTDIR=fmt-package -j4 install
+            fpm -a armhf -s dir -t deb -n fmt -v 8.1 -C fmt-package \
             ls -a
 
 
