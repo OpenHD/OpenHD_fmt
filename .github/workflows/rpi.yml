@@ -30,7 +30,7 @@ jobs:
         base_image: raspios_lite:latest
         image_additional_mb: 4000
         copy_repository_path: /opt
-        copy_artifact_path: Open.HD
+        copy_artifact_path: OpenHD_fmt
         import_github_env: true
         commands: |
             cd OpenHD_fmt
@@ -40,9 +40,9 @@ jobs:
             mkdir build 
             cd build
             cmake ..
-            mkdir /tmp/fmt-package
-            sudo make DESTDIR=/tmp/fmt-package -j4 install
-            cd ../../
+            mkdir fmt-package
+            sudo make DESTDIR=fmt-package -j4 install
+            fpm -a armhf -s dir -t deb -n fmt -v 8.1 -C fmt-package \
 
     - name: Upload to Github
       uses: 'actions/upload-artifact@v2'
