@@ -35,6 +35,7 @@ jobs:
         commands: |
             cd OpenHD_fmt
             ls -a
+            sudo chmod +x install_dep.sh
             sudo ./install_dep.sh
             mkdir build 
             cd build
