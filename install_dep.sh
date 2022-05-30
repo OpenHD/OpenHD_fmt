@@ -3,7 +3,7 @@
 # Install all the dependencies needed to build OpenHD from source.
 # TODO do we need libgstreamer1.0-dev and libgstreamer-plugins-base1.0-dev ?
    
-
+apt update
 apt -y install build-essential autotools-dev automake libtool autoconf \
             libboost-all-dev libasio-dev \
             libusb-1.0-0-dev \
