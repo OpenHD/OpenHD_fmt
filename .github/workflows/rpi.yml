@@ -42,7 +42,8 @@ jobs:
             cmake ..
             mkdir fmt-package
             sudo make DESTDIR=fmt-package -j4 install
-            fpm -a armhf -s dir -t deb -n fmt -v 8.1 -C fmt-package \
+            fpm -a armhf -s dir -t deb -n fmt -v 8.1 -C fmt-package -p fmt_VERSION_ARCH.deb
+            ls -a
 
 
     - name: Upload to Github
