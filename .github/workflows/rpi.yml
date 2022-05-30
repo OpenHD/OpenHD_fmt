@@ -36,6 +36,7 @@ jobs:
             cd OpenHD_fmt
             mkdir build 
             cd build
+            sudo ./install_dep.sh
             cmake ..
             mkdir /tmp/fmt-package
             sudo make DESTDIR=/tmp/fmt-package -j4 install
