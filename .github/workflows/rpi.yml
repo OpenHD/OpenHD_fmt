@@ -44,7 +44,7 @@ jobs:
       with:
         name: "FMT"
         path: |
-          *.deb
+          OpenHD_fmt/*.deb
           *.log
 
 
