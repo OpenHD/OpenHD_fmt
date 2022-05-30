@@ -34,9 +34,9 @@ jobs:
         import_github_env: true
         commands: |
             cd OpenHD_fmt
+            sudo ./install_dep.sh
             mkdir build 
             cd build
-            sudo ./install_dep.sh
             cmake ..
             mkdir /tmp/fmt-package
             sudo make DESTDIR=/tmp/fmt-package -j4 install
