@@ -35,7 +35,7 @@ jobs:
             ls -a
             sudo chmod +x install_dep.sh
             sudo ./install_dep.sh
-            audo apt -y install tree
+            sudo apt -y install tree
             mkdir build 
             cd build
             cmake ..
