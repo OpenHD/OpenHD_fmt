@@ -42,17 +42,17 @@ jobs:
             mkdir fmt-package
             sudo make DESTDIR=fmt-package -j4 install
             fpm -a armhf -s dir -t deb -n fmt -v 8.1 -C fmt-package -p fmt_VERSION_ARCH.deb
-            tree
+            
 
-    - name: update
-      run: ls -a
+    - name: show files
+      run: tree
 
     - name: Upload to Github
       uses: 'actions/upload-artifact@v2'
       with:
         name: "FMT"
         path: |
-          *.deb
+          build/*.deb
           *.log
 
 
@@ -68,7 +68,7 @@ jobs:
         distro: "raspbian"
         release: "bullseye"
         republish: "true" # needed ONLY if version is not changing
-        file: "*.deb"
+        file: "build/*.deb"
 
 
       #- name: Install
