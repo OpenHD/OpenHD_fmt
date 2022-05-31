@@ -46,14 +46,14 @@ jobs:
             ls -a
 
     - name: update
-      run: cd /OpenHD_fmt && ls -a
+      run: ls -a
 
     - name: Upload to Github
       uses: 'actions/upload-artifact@v2'
       with:
         name: "FMT"
         path: |
-          OpenHD_fmt/*.deb
+          *.deb
           *.log
 
 
