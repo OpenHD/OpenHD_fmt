@@ -32,7 +32,6 @@ jobs:
         bind_mount_repository: true
         import_github_env: true
         commands: |
-            cd OpenHD_fmt
             ls -a
             sudo chmod +x install_dep.sh
             sudo ./install_dep.sh
