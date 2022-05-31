@@ -46,8 +46,7 @@ jobs:
             ls -a
 
     - name: update
-      run: cd /OpenHD_fmt
-      run: ls -a
+      run: cd /OpenHD_fmt && ls -a
 
     - name: Upload to Github
       uses: 'actions/upload-artifact@v2'
