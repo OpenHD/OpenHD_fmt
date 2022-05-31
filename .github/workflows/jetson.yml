@@ -1,0 +1,71 @@
+name: Build Jetson
+
+on: [push]
+
+env:
+  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+  BUILD_TYPE: Release
+
+jobs:
+  build:
+    runs-on: [self-hosted, linux, ARM64]
+    steps:
+      - name: test
+        run: |
+          echo "DT=$(date +'%Y-%m-%d_%H%M')" >> $GITHUB_ENV
+          echo "BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV    
+
+      - name: Clean UP
+        run: |
+          sudo rm -Rf *
+
+      - name: Checkout repository and submodules
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Build with cmake
+        run: |
+          ls -a
+          sudo chmod +x install_dep.sh
+          sudo ./install_dep.sh
+          sudo apt -y install tree
+          mkdir build 
+          cd build
+          cmake ..
+          mkdir fmt-package
+          sudo make DESTDIR=fmt-package -j4 install
+          fpm -a armhf -s dir -t deb -n fmt -v 8.1 -C fmt-package -p fmt_VERSION_ARCH.deb
+
+      - name: Upload to Github
+        uses: 'actions/upload-artifact@v2'
+        with:
+          name: "fmt"
+          path: |
+            build/*.deb
+            *.deb
+            *.log
+    
+      - name: Push
+        id: push
+        uses: cloudsmith-io/action@master
+        with:
+          api-key: ${{ secrets.CLOUDSMITH_API_KEY }}
+          command: "push"
+          format: "deb"
+          owner: "openhd"
+          repo: "openhd-2-1-alpha"
+          distro: "ubuntu"
+          release: "bionic"
+          republish: "true" # needed ONLY if version is not changing
+          file: "*build/*.deb"
+          
+      #- name: Install
+      #  run: |
+      #    cd OpenHD/build
+      #    sudo cmake --install .
+      #- name: Build ninja
+      #  run: |
+      #    sudo apt -y install ninja-build
+      #    cd OpenHD
+      #    ./build_cmake.sh
