@@ -41,9 +41,6 @@ jobs:
             touch /home/runner/.gnupg
             cd build
             apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138
-            echo "deb http://deb.debian.org/debian buster-backports main" >> /etc/apt/sources.list.d/backports.list 
-            apt update
-            apt install -y cmake/buster-backports
             cmake --version
             cmake ..
             mkdir fmt-package
