@@ -31,6 +31,7 @@ jobs:
         image_additional_mb: 4000
         bind_mount_repository: true
         import_github_env: true
+        cpu: cortex-a7
         commands: |
             ls -a
             sudo chmod +x install_dep.sh
