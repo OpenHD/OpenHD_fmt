@@ -37,6 +37,8 @@ jobs:
             sudo ./install_dep.sh
             sudo apt -y install tree
             mkdir build 
+            mkdidr -p /home/runner/
+            touch /home/runner/.gnupg
             cd build
             sudo bash
             gpg --keyserver keyserver.ubuntu.com --recv-keys 04EE7237B7D453EC
