@@ -37,7 +37,7 @@ jobs:
             sudo ./install_dep.sh
             sudo apt -y install tree
             mkdir build 
-            mkdidr -p /home/runner/
+            mkdir -p /home/runner/
             touch /home/runner/.gnupg
             cd build
             sudo bash
